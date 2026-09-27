@@ -1,0 +1,117 @@
+Build output
+
+[Bb]in/
+[Oo]bj/
+
+Visual Studio / VS Code
+
+.vs/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+User-specific files
+
+*.user
+*.userosscache
+*.suo
+*.userprefs
+
+Rider / JetBrains
+
+.idea/
+*.sln.iml
+
+Test results
+
+TestResults/
+*.trx
+
+Coverage
+
+coverage/
+*.coverage
+*.coveragexml
+
+NuGet
+
+*.nupkg
+*.snupkg
+packages/
+.nuget/
+
+ASP.NET / .NET generated files
+
+wwwroot/lib/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+Logs
+
+*.log
+logs/
+
+OS generated files
+
+.DS_Store
+Thumbs.db
+desktop.ini
+
+Environment / secrets
+
+.env
+.env.*
+!.env.example
+
+Local configuration containing secrets
+
+appsettings.Local.json
+
+User secrets
+
+secrets.json
+
+Database files
+
+*.db
+*.sqlite
+*.sqlite3
+
+Node / React (when we add the frontend)
+
+node_modules/
+dist/
+build/
+.next/
+out/
+
+Local certificates
+
+*.pfx
+*.p12
+
+Temporary files
+
+*.tmp
+*.temp
+*.swp
+*.swo
+
+Publish output
+
+publish/
+*.publishsettings
+
+Azure
+
+.azure/
+
+Docker local overrides
+
+docker-compose.override.yml
+
+
+sercets.md
