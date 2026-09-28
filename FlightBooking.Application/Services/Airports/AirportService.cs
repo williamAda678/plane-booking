@@ -46,7 +46,6 @@ public class AirportService(IAirportRepository repository) : IAirportService
     {
         var airport = await _repository.GetAirportsAsync();
 
-
         return airport.Select(ToResponseDto);
     }
 

@@ -5,10 +5,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DTOs\" />
     <Folder Include="DTOs\Airports\" />
     <Folder Include="Interfaces\" />
-    <Folder Include="Services\" />
     <Folder Include="Services\Airports\" />
   </ItemGroup>
 

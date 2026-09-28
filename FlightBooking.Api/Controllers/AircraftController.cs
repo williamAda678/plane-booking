@@ -1,6 +1,5 @@
-using FlightBooking.Application.DTOs.Airports;
-using FlightBooking.Application.Services.Airports;
-using FlightBooking.Domain.Entities;
+using FlightBooking.Application.DTOs.Aircraft;
+using FlightBooking.Application.Services.Aircrafts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,45 +7,45 @@ namespace FlightBooking.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AirportsController(IAirportService airportService) : ControllerBase
+    public class AircraftController(IAircraftService aircraftService) : ControllerBase
     {
-        private readonly IAirportService _airportService = airportService;
+        private readonly IAircraftService _aircraftService = aircraftService;
 
-        //  GET    /api/airports
+        //  GET    /api/aircraft
         [HttpGet]
         public async Task<IActionResult> GetAirports()
         {
-            return Ok(await _airportService.GetAirportsAsync());
+            return Ok(await _aircraftService.GetAircraftAsync());
         }
-        //  GET    /api/airports/{id}
+        //  GET    /api/aircraft/{id}
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAirport(Guid id)
         {
-            var airport = await _airportService.GetAirportByIdAsync(id);
+            var airport = await _aircraftService.GetAircraftByIdAsync(id);
 
             if (airport == null) return NotFound();
             return Ok(airport);
         }
 
-        //  POST   /api/airports
+        //  POST   /api/aircraft
         [HttpPost]
-        public async Task<IActionResult> CreateAiport([FromBody] CreateAirportDto createAirportDto)
+        public async Task<IActionResult> CreateAiport([FromBody] CreateAircraftDto createAircraftDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var airport = await _airportService.CreateAirportAsync(createAirportDto);
+            var airport = await _aircraftService.CreateAircraftAsync(createAircraftDto);
             return CreatedAtAction(nameof(GetAirport), new { id = airport.Id }, airport);
         }
 
-        //  PUT    /api/airports/{id}
+        //  PUT    /api/aircraft/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAirport(Guid id, [FromBody] UpdateAirportDto updateAirportDto)
+        public async Task<IActionResult> UpdateAirport(Guid id, [FromBody] UpdateAircraftDto updateAircraftDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var airport = await _airportService.UpdateAirportAsync(id, updateAirportDto);
+            var airport = await _aircraftService.UpdateAircraftAsync(id, updateAircraftDto);
 
             if (airport == null)
                 return NotFound();
@@ -54,11 +53,11 @@ namespace FlightBooking.Api.Controllers
             return Ok(airport);
         }
 
-        //  DELETE /api/airports/{id}
+        //  DELETE /api/aircraft/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAirport(Guid id)
         {
-            var result = await _airportService.DeleteAirportAsync(id);
+            var result = await _aircraftService.DeleteAircraftAsync(id);
 
             if (!result)
                 return NotFound();
