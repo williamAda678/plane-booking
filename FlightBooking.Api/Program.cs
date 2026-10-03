@@ -1,6 +1,7 @@
 using FlightBooking.Application.Interfaces;
 using FlightBooking.Application.Services.Aircrafts;
 using FlightBooking.Application.Services.Airports;
+using FlightBooking.Application.Services.Flights;
 using FlightBooking.Infrastructure.Data;
 using FlightBooking.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,9 @@ builder.Services.AddScoped<IAirportService, AirportService>();
 
 builder.Services.AddScoped<IAircraftRepository, AircraftRepository>();
 builder.Services.AddScoped<IAircraftService, AircraftService>();
+
+builder.Services.AddScoped<IFlightRepository, FlightRepository>();
+builder.Services.AddScoped<IFlightService, FlightService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

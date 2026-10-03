@@ -6,8 +6,10 @@
 
   <ItemGroup>
     <Folder Include="DTOs\Airports\" />
+    <Folder Include="DTOs\flights\" />
     <Folder Include="Interfaces\" />
     <Folder Include="Services\Airports\" />
+    <Folder Include="Services\Flights\" />
   </ItemGroup>
 
   <PropertyGroup>

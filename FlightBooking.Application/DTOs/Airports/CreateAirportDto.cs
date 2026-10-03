@@ -1,11 +1,12 @@
 using System;
 
-namespace FlightBooking.Application.DTOs.Airports;
-
-public class CreateAirportDto
+namespace FlightBooking.Application.DTOs.Airports
 {
-    public required string Code { get; set; }
-    public required string Name { get; set; }
-    public required string City { get; set; }
-    public required string Country { get; set; }
+    public class CreateAirportDto
+    {
+        public required string Code { get; set; }
+        public required string Name { get; set; }
+        public required string City { get; set; }
+        public required string Country { get; set; }
+    }
 }

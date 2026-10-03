@@ -1,12 +1,13 @@
 using System;
 
-namespace FlightBooking.Application.DTOs.Airports;
-
-public class AirportResponseDto
+namespace FlightBooking.Application.DTOs.Airports
 {
-    public Guid Id { get; set; }
-    public required string Code { get; set; }
-    public required string Name { get; set; }
-    public required string City { get; set; }
-    public required string Country { get; set; }
+    public class AirportResponseDto
+    {
+        public Guid Id { get; set; }
+        public required string Code { get; set; }
+        public required string Name { get; set; }
+        public required string City { get; set; }
+        public required string Country { get; set; }
+    }
 }

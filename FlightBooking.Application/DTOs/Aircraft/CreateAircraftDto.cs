@@ -1,10 +1,11 @@
 using System;
 
-namespace FlightBooking.Application.DTOs.Aircraft;
-
-public class CreateAircraftDto
+namespace FlightBooking.Application.DTOs.Aircraft
 {
-    public required string Model { get; set; }
-    public required string Registration { get; set; }
-    public int SeatCapacity { get; set; }
+    public class CreateAircraftDto
+    {
+        public required string Model { get; set; }
+        public required string Registration { get; set; }
+        public int SeatCapacity { get; set; }
+    }
 }

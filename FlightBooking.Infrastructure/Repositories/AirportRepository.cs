@@ -32,7 +32,6 @@ public class AirportRepository(FlightBookingDbContext context) : IAirportReposit
         await _context.SaveChangesAsync();
 
         return true;
-
     }
 
     public async Task<Airport?> GetAirportByIdAsync(Guid id)
