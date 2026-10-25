@@ -1,5 +1,8 @@
 using System;
+using FlightBooking.Application.DTOs.Aircraft;
+using FlightBooking.Application.DTOs.Airports;
 using FlightBooking.Application.DTOs.flights;
+using FlightBooking.Application.DTOs.SearchFlight;
 using FlightBooking.Application.Interfaces;
 using FlightBooking.Domain.Entities;
 
@@ -120,6 +123,64 @@ public class FlightService : IFlightService
             DepartureTime = flight.DepartureTime,
             ArrivalTime = flight.ArrivalTime,
             Price = flight.Price
+        };
+    }
+
+    public async Task<PagedFlightResultDto> SearchFlightsAsync(SearchFlightRequestDto request)
+    {
+        if (request.DepartureAirportId.HasValue && request.ArrivalAirportId.HasValue &&
+            request.DepartureAirportId == request.ArrivalAirportId)
+            throw new ArgumentException("Departure and arrival airports must be different.");
+
+        if (request.Passengers < 1)
+            throw new ArgumentException("Passengers must be at least 1.");
+
+        if (request.PageNumber < 1 || request.PageSize is < 1 or > 100)
+            throw new ArgumentException("Page number must be at least 1 and page size must be between 1 and 100.");
+
+        var (flights, totalCount) = await _flightRepository.SearchFlightsAsync(request);
+
+        return new PagedFlightResultDto
+        {
+            PageNumber = request.PageNumber,
+            PageSize = request.PageSize,
+            TotalCount = totalCount,
+            Items = flights.Select(ToSearchResultDto).ToList()
+        };
+    }
+
+    private static FlightSearchResultDto ToSearchResultDto(Flight flight)
+    {
+        return new FlightSearchResultDto
+        {
+            Id = flight.Id,
+            FlightNumber = flight.FlightNumber,
+            DepartureTime = flight.DepartureTime,
+            ArrivalTime = flight.ArrivalTime,
+            Price = flight.Price,
+            DepartureAirport = new AirportResponseDto
+            {
+                Id = flight.DepartureAirport.Id,
+                Code = flight.DepartureAirport.Code,
+                Name = flight.DepartureAirport.Name,
+                City = flight.DepartureAirport.City,
+                Country = flight.DepartureAirport.Country
+            },
+            ArrivalAirport = new AirportResponseDto
+            {
+                Id = flight.ArrivalAirport.Id,
+                Code = flight.ArrivalAirport.Code,
+                Name = flight.ArrivalAirport.Name,
+                City = flight.ArrivalAirport.City,
+                Country = flight.ArrivalAirport.Country
+            },
+            Aircraft = new AircraftResponseDto
+            {
+                Id = flight.Aircraft.Id,
+                Model = flight.Aircraft.Model,
+                Registration = flight.Aircraft.Registration,
+                SeatCapacity = flight.Aircraft.SeatCapacity
+            }
         };
     }
 }

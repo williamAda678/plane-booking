@@ -1,4 +1,5 @@
 using System;
+using FlightBooking.Application.DTOs.SearchFlight;
 using FlightBooking.Domain.Entities;
 
 namespace FlightBooking.Application.Interfaces;
@@ -10,4 +11,7 @@ public interface IFlightRepository
     Task<Flight> CreateFlightAsync(Flight flight);
     Task<Flight?> UpdateFlightAsync(Guid id, Flight flight);
     Task<bool> DeleteFlightAsync(Guid id);
+
+    Task<(IReadOnlyList<Flight> Flights, int TotalCount)>
+        SearchFlightsAsync(SearchFlightRequestDto request);
 }

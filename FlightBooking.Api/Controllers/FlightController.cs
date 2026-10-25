@@ -1,11 +1,12 @@
 using FlightBooking.Application.DTOs.flights;
+using FlightBooking.Application.DTOs.SearchFlight;
 using FlightBooking.Application.Services.Flights;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FlightBooking.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/flights")]
     [ApiController]
     public class FlightController(IFlightService flightService) : ControllerBase
     {
@@ -17,6 +18,21 @@ namespace FlightBooking.Api.Controllers
         {
             return Ok(await _flightService.GetFlightsAsync());
         }
+
+        // GET /api/flight/search
+        [HttpGet("search")]
+        public async Task<IActionResult> SearchFlights([FromQuery] SearchFlightRequestDto request)
+        {
+            try
+            {
+                return Ok(await _flightService.SearchFlightsAsync(request));
+            }
+            catch (ArgumentException exception)
+            {
+                return BadRequest(new { error = exception.Message });
+            }
+        }
+
         //  GET    /api/flight/{id}
         [HttpGet("{id}")]
         public async Task<IActionResult> GetFlight(Guid id)
